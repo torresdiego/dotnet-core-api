@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TodoApi.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace TodoApi
 {
@@ -28,6 +31,9 @@ namespace TodoApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+
+            services.AddRazorPages()
+            .WithRazorPagesRoot("/front");
 
             services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
         }
@@ -52,7 +58,7 @@ namespace TodoApi
 
             //app.UseHttpsRedirection();
 
-            app.UseDefaultFiles();
+        app.UseDefaultFiles();
 
             app.UseStaticFiles();
 
